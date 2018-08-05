@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using lerpKit;
 
+//last updated: 8/5/18
+
 namespace lerpKit
 {
     public enum updateLocation { fixedUpdate, Update };
@@ -10,7 +12,8 @@ namespace lerpKit
     public enum guideDistance { distBetween_Other, distBetween_StartAndEnd, distBetween_CurrAndEnd, distBetween_StartAndCurr };
 }
 
-public static class lerpEXT{
+public static class lerpEXT
+{
 
     //-----FUNCTION VERSIONS that use a dummy (non used) instance of 'whatever type you are lerping between'
 
