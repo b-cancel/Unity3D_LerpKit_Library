@@ -1,6 +1,7 @@
 # Unity3D_LerpKit_Library
 
 <h2>Demo</h2>
+<h5>This crudely constructed demo clearly illustrates the differences between using .Lerp(), .MoveTowards(), and .Lerp() + LerpKit</h5>
 https://b-cancel.github.io/Unity3D_LerpKit_Demo/
 
 <h2>Purpose</h2>
