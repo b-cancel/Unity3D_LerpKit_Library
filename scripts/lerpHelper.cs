@@ -124,6 +124,26 @@ namespace lerpKit
                 return 441.672956f; // maxDistanceInRGBColorSpace
         }
 
+        /// <summary>
+        /// You only need to fill in the values that guide distance is asking for
+        /// the other parameter must be filled in but will not affect the result
+        /// NOTE: guideDistance.other has no definition for anything but color
+        /// EX: IF (your passed GD == guideDistance.distBetween_StartAndEnd) -> currValue(s) will not be used
+        ///     because GD is only asking for a startValue(s) and endValue(s)
+        /// </summary>
+        public static float calcGuideDistanceAngle(float startAngle, float currAngle, float endAngle, guideDistance GD, wrapType wT)
+        {
+            float shortestDist;
+            if (GD == guideDistance.distBetween_StartAndCurr)
+                shortestDist = Mathf.Abs(Mathf.DeltaAngle(startAngle, currAngle));
+            else if (GD == guideDistance.distBetween_StartAndEnd)
+                shortestDist = Mathf.Abs(Mathf.DeltaAngle(startAngle, endAngle));
+            else
+                shortestDist = Mathf.Abs(Mathf.DeltaAngle(currAngle, endAngle));
+            shortestDist = shortestDist % 360;
+            return (wT == wrapType.shortest) ? shortestDist : 360 - shortestDist; //this should only return a value between 0 -> 360
+        }
+
         //-------------------------CALCULATE LERP VALUE-------------------------
 
         public static float calcLerpValue(float currValue, float endValue, float lerpVelocity_DperF)
@@ -175,6 +195,16 @@ namespace lerpKit
         {
             //---calc distance left to travel
             float distToFinish = distance(currColor, endColor);
+
+            //--- calc lerp value based on this
+            return Mathf.Clamp((lerpVelocity_DperF / distToFinish), 0, 1);
+        }
+
+        public static float calcLerpValueAngle(float currAngle, float endAngle, float lerpVelocity_DperF, wrapType wT)
+        {
+            float shortestDist = Mathf.Abs(Mathf.DeltaAngle(currAngle, endAngle)) % 360;
+            //---calc distance left to travel
+            float distToFinish = (wT == wrapType.shortest) ? shortestDist : 360 - shortestDist;
 
             //--- calc lerp value based on this
             return Mathf.Clamp((lerpVelocity_DperF / distToFinish), 0, 1);

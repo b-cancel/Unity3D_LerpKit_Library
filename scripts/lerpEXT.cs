@@ -10,6 +10,7 @@ namespace lerpKit
     public enum updateLocation { fixedUpdate, update };
     public enum unitOfTime { frames, seconds };
     public enum guideDistance { distBetween_Other, distBetween_StartAndEnd, distBetween_CurrAndEnd, distBetween_StartAndCurr };
+    public enum wrapType { shortest, longest };
 }
 
 public static class lerpEXT
@@ -49,6 +50,11 @@ public static class lerpEXT
         return lerpHelper.calcGuideDistance(startColor, currColor, endColor, GD);
     }
 
+    public static float calcGuideDistanceAngle(this float f, float startAngle, float currAngle, float endAngle, guideDistance GD, wrapType wT)
+    {
+        return lerpHelper.calcGuideDistanceAngle(startAngle, currAngle, endAngle, GD, wT);
+    }
+
     #endregion
 
     #region Calculate Lerp Value
@@ -81,6 +87,11 @@ public static class lerpEXT
     public static float calcLerpValue(this Color c, Color currColor, Color endColor, float lerpVelocity_DperF)
     {
         return lerpHelper.calcLerpValue(currColor, endColor, lerpVelocity_DperF);
+    }
+
+    public static float calcLerpValueAngle(this float f, float currAngle, float endAngle, float lerpVelocity_DperF, wrapType wT)
+    {
+        return lerpHelper.calcLerpValueAngle(currAngle, endAngle, lerpVelocity_DperF, wT);
     }
 
     #endregion
@@ -129,6 +140,11 @@ public static class lerpEXT
         return lerpHelper.calcGuideDistance(startColor, currColor, endColor, GD);
     }
 
+    public static float calcGuideDistanceAngle(this float startAngle, float currAngle, float endAngle, guideDistance GD, wrapType wT)
+    {
+        return lerpHelper.calcGuideDistanceAngle(startAngle, currAngle, endAngle, GD, wT);
+    }
+
     #endregion
 
     #region Calculate Lerp Value
@@ -161,6 +177,11 @@ public static class lerpEXT
     public static float calcLerpValue(this Color currColor, Color endColor, float lerpVelocity_DperF)
     {
         return lerpHelper.calcLerpValue(currColor, endColor, lerpVelocity_DperF);
+    }
+
+    public static float calcLerpValueAngle(this float currAngle, float endAngle, float lerpVelocity_DperF, wrapType wT)
+    {
+        return lerpHelper.calcLerpValueAngle(currAngle, endAngle, lerpVelocity_DperF, wT);
     }
 
     #endregion
